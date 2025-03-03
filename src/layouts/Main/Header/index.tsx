@@ -17,8 +17,8 @@ export default function Header() {
   };
 
   return (
-    <div className="border-b-[1px] border-[rgb(30,44,67)]">
-      <div className="2xl:container 2xl:mx-auto">
+    <div className="fixed z-50">
+      <div className="2xl:container 2xl:mx-auto h-[60px]">
         <div className="flex items-center px-4">
           {/* sub item */}
           <div className="block xl:hidden">

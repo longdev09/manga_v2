@@ -95,3 +95,13 @@ export type GetSearchMangaOrder = {
   relevance?: Order;
   rating?: Order;
 };
+
+/** Đối tượng  cho Get MangaIdFeedRequestOptions */
+export type GetMangaIdFeedOrder = {
+  createdAt?: Order;
+  updatedAt?: Order;
+  publishAt?: Order;
+  readableAt?: Order;
+  volume?: Order;
+  chapter?: Order;
+};

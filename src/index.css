@@ -1,85 +1,59 @@
 @import "tailwindcss";
 
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+
+
 
 
 
 body{
- 
-    font-family: "Poppins", sans-serif;
-    /* background-image: url(./assets/Bg/body-bg.jpg); */
-    background: #0d0d0d;
-
-}
-:root{
-    --color-main: #0e1726;
-    --color-main2: #182335;
-    --sub-text: #8f96a0;
-    --bg-item: #1e2c43;
-    --sub-text-blue: #8bbadd;
-    --text-color-hover: #3c8bc6;
-}
-
-
-@layer utilities {
-    .bg-custom-image {
-      background-image: url('./assets/Bg/body-bg.jpg');
-      
-    }
-  
-    
-}
-
+  font-family: 'Inter', sans-serif;
+  background: #0e0e0e;
   
 
-
-  /* custom-scrollbar.css */
-::-webkit-scrollbar {
-  width: 12px; /* Chiều rộng của thanh cuộn */
 }
 
-::-webkit-scrollbar-track {
-  background: #070c13; /* Màu nền của thanh cuộn */
+
+
+
+
+:root {
+
+  --bg-item: #1c1c1c;  /* màu dành cho các item */
+  --border-item: #2b2929;
+  --bg-item-hover: #242424; /* màu dành cho các item khi hover */
+  --bg-btn: #5a2e98;
+  --bg-btn-hover: #713abf;
+  
+  --color-text-main: #8c5ece;  /* màu dành cho text dành cho cả hover, cac text chinh */
+  --color-text-title: #ddd; /*màu dành cho title */
+  --color-text-item: #747c88;  /*màu dành cho các text item */
+  --color-text-sub: #a885da; /* màu dành cho sub text */
 }
 
-::-webkit-scrollbar-thumb {
-  background-color: #263855; /* Màu của thanh trượt */
-  /* Bo tròn thanh trượt */
-  border: 3px solid #263855; /* Viền của thanh trượt */
+
+.container {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 30px;
+  padding-right: 30px;
 }
 
-/* Thiết lập mũi tên lên xuống */
-/* .scrollbar-custom::-webkit-scrollbar-button {
-    display: block;
-    height: 1px;
-    width: 100%;
-  }
-  
-  .scrollbar-custom::-webkit-scrollbar-button:vertical:decrement {
-    background-color: #888;
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
-  }
-  
-  .scrollbar-custom::-webkit-scrollbar-button:vertical:increment {
-    background-color: #888;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-  } */
+.container {
+  max-width: 1500px;
+}
 
-/* css swiper */
+li{
+  list-style-type: none;
+}
 
-  .swiper-scrollbar {
-    background: #1e2c43 !important;
-    height: 2px !important;
-    width: 100% !important;
-    left: 0 !important;
-    right: 0 !important;
-  }
-  
-  .swiper-scrollbar-drag {
-    background:#8bbadd !important;
-  }
+
+.active-btn {
+  background-color: var(--bg-btn) !important;
+  color: white !important;
+}
+
 
 
 

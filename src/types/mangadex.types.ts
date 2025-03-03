@@ -55,10 +55,213 @@ export type GetSearchMangaRequestOptions = {
   group?: string;
 };
 
+export type GetChapterRequestOptions = {
+  /**
+   * ```console
+   * Mặc định: 10
+   * Tối thiểu: 0
+   * Tối đa: 100
+   * ```
+   */
+  limit?: number;
+  offset?: number;
+  /** Danh sách chuỗi UUID (giới hạn 100 mục mỗi yêu cầu) */
+  ids?: string[];
+  title?: string;
+  /** Danh sách chuỗi UUID */
+  groups?: string[];
+  /** Chuỗi UUID hoặc danh sách chuỗi UUID */
+  uploader?: string | string[];
+  /** Chuỗi UUID */
+  manga?: string;
+  volume?: string | string[];
+  chapter?: string | string[];
+  /** Mã ngôn ngữ theo tiêu chuẩn ISO 639-1 (hai hoặc năm ký tự) */
+  translatedLanguage?: string[];
+  /** Mã ngôn ngữ theo tiêu chuẩn ISO 639-1 (hai hoặc năm ký tự) */
+  originalLanguage?: string[];
+  /** Mã ngôn ngữ theo tiêu chuẩn ISO 639-1 (hai hoặc năm ký tự) */
+  excludedOriginalLanguage?: string[];
+  contentRating?: MangadexApi.Static.MangaContentRating[];
+  /** Chuỗi UUID */
+  excludedGroups?: string[];
+  /** Chuỗi UUID */
+  excludedUploaders?: string[];
+  /** Mặc định: '1' */
+  includeFutureUpdates?: "0" | "1";
+  includeEmptyPages?: 0 | 1;
+  includeFuturePublishAt?: 0 | 1;
+  includeExternalUrl?: 0 | 1;
+  /** Định dạng thời gian: YYYY-MM-DDTHH:mm:SS */
+  createdAtSince?: string;
+  /** Định dạng thời gian: YYYY-MM-DDTHH:mm:SS */
+  updatedAtSince?: string;
+  /** Định dạng thời gian: YYYY-MM-DDTHH:mm:SS */
+  publishAtSince?: string;
+  order?: GetChapterOrder;
+  includes?: ReferenceExpansionChapter;
+};
+
+export type ReferenceExpansionChapter = (
+  | "manga"
+  | "scanlation_group"
+  | "user"
+)[];
+
+export type GetStatisticsRequestOptions = {
+  manga: string[];
+};
+
+export type GetMangaIdFeedRequestOptions = {
+  /**
+   * ```console
+   * Mặc định: 100
+   * Tối thiểu: 1
+   * Tối đa: 500
+   * ```
+   */
+  limit?: number;
+  /** Tối thiểu: 0 */
+  offset?: number;
+  /** Mã ngôn ngữ theo chuẩn ISO 639-1 (2 hoặc 5 ký tự) */
+  translatedLanguage?: string[];
+  /** Mã ngôn ngữ gốc theo chuẩn ISO 639-1 (2 hoặc 5 ký tự) */
+  originalLanguage?: string[];
+  /** Mã ngôn ngữ gốc bị loại trừ theo chuẩn ISO 639-1 (2 hoặc 5 ký tự) */
+  excludedOriginalLanguage?: string[];
+  /** Phân loại nội dung truyện */
+  contentRating?: MangadexApi.Static.MangaContentRating[];
+  /** Danh sách nhóm dịch bị loại trừ (UUID) */
+  excludedGroups?: string[];
+  /** Danh sách người đăng bị loại trừ (UUID) */
+  excludedUploaders?: string[];
+  /** Mặc định: 1 */
+  includeFutureUpdates?: "0" | "1";
+  /** Lọc theo thời gian tạo, định dạng: YYYY-MM-DDTHH:mm:SS */
+  createdAtSince?: string;
+  /** Lọc theo thời gian cập nhật, định dạng: YYYY-MM-DDTHH:mm:SS */
+  updatedAtSince?: string;
+  /** Lọc theo thời gian phát hành, định dạng: YYYY-MM-DDTHH:mm:SS */
+  publishAtSince?: string;
+  /** Tùy chọn sắp xếp */
+  order?: MangadexApi.Static.GetMangaIdFeedOrder;
+  /** Danh sách các thuộc tính mở rộng */
+  includes?: MangadexApi.Static.Includes[];
+};
+
+export type GetMangaIdRequestOptions = {
+  includes?: MangadexApi.Static.Includes[];
+};
+
+/***********************
+ * TYPE CHAPTER
+ ***********************/
+
+export type GetChapterOrder = {
+  createdAt?: MangadexApi.Static.Order;
+  updatedAt?: MangadexApi.Static.Order;
+  publishAt?: MangadexApi.Static.Order;
+  readableAt?: MangadexApi.Static.Order;
+  volume?: MangadexApi.Static.Order;
+  chapter?: MangadexApi.Static.Order;
+};
+
+export type ChapterAttributes = {
+  /**
+   * ```console
+   * Độ dài tối đa: 255 ký tự
+   * ```
+   */
+  title: string;
+  volume: string;
+  /**
+   * ```console
+   * Độ dài tối đa: 8 ký tự
+   * ```
+   */
+  chapter: string;
+  pages: number;
+  /** Mẫu: `^[a-z]{2}(-[a-z]{2})?$` (Mã ngôn ngữ theo chuẩn ISO 639-1) */
+  translatedLanguage: string;
+  /** Chuỗi UUID (định danh của người tải lên) */
+  uploader: string;
+  /**
+   * ```console
+   * Độ dài tối đa: 512 ký tự
+   * Mẫu: ^https?:// (Phải là một URL hợp lệ)
+   * ```
+   */
+  externalUrl: string;
+  /**
+   * ```console
+   * Giá trị tối thiểu: 1
+   * ```
+   */
+  version: number;
+  createdAt: string; // Thời gian tạo
+  updatedAt: string; // Thời gian cập nhật
+  publishAt: string; // Thời gian xuất bản
+  readableAt: string; // Thời gian có thể đọc được
+};
+
+export type Relationship = {
+  /** Chuỗi UUID (định danh duy nhất) */
+  id: string;
+  type: string;
+  /** Chỉ có nếu thuộc tính này là quan hệ giữa các thực thể Manga */
+  related:
+    | "monochrome" // Phiên bản đơn sắc
+    | "main_story" // Câu chuyện chính
+    | "adapted_from" // Chuyển thể từ nguồn khác
+    | "based_on" // Dựa trên một tác phẩm khác
+    | "prequel" // Tiền truyện
+    | "side_story" // Ngoại truyện
+    | "doujinshi" // Doujinshi (tác phẩm do fan sáng tác)
+    | "same_franchise" // Cùng một thương hiệu
+    | "shared_universe" // Cùng vũ trụ
+    | "sequel" // Hậu truyện
+    | "spin_off" // Truyện phái sinh
+    | "alternate_story" // Phiên bản truyện thay thế
+    | "alternate_version" // Phiên bản khác của truyện
+    | "preserialization" // Xuất bản trước khi chính thức
+    | "colored" // Phiên bản có màu
+    | "serialization"; // Đang trong quá trình phát hành
+  /** Nếu có mở rộng tham chiếu, thuộc tính này sẽ chứa dữ liệu chi tiết */
+  attributes: any | null;
+};
+
+export type Chapter = {
+  /** UUID formatted string */
+  id: string;
+  type: "chapter";
+  attributes: ChapterAttributes;
+  relationships: Relationship[];
+};
+
+export type ChapterList = {
+  /** Default: "ok" */
+  result: string;
+  /** Default: "collection" */
+  response: string;
+  data: Chapter[];
+  limit: number;
+  offset: number;
+  total: number;
+};
+
+export type ExtendChapter = Chapter & {
+  manga?: Manga;
+  scanlation_group?: Partial<ScanlationGroup> &
+    Pick<ScanlationGroup, "id" | "type">;
+  user: User;
+};
+
 /***********************
  * API RESPONSE
  ***********************/
-export type MangaResponse = {
+export type GetChapterResponse = ChapterList;
+
+export type GetMangaResponse = {
   result: string;
   response: string;
   data: Manga[];
@@ -66,6 +269,30 @@ export type MangaResponse = {
   offset: number;
   total: number;
 };
+
+export type GetMangaIdResponse = {
+  result: string;
+  response: string;
+  data: Manga;
+};
+
+export type GetStatisticsResponse = {
+  result: string;
+  statistics: Record<string, Statistics>;
+};
+
+export type GetMangaIdFeedResponse = {
+  result: string;
+  response: string;
+  data: Chapter[];
+  limit: number;
+  offset: number;
+  total: number;
+};
+
+/***********************
+ * TYPE MANGADEX
+ ***********************/
 
 export type Manga = {
   id: string;
@@ -77,7 +304,7 @@ export type Manga = {
 // Định nghĩa kiểu dữ liệu cho thuộc tính của MangaDex
 type MangaDexAttributes = {
   title: LocalizedString; // Tiêu đề manga theo nhiều ngôn ngữ (VD: { en: "Tên Tiếng Anh", ja: "Tên Nhật Bản" })
-  altTitles: LocalizedString; // Danh sách tiêu đề thay thế theo nhiều ngôn ngữ
+  altTitles: LocalizedString[]; // Danh sách tiêu đề thay thế theo nhiều ngôn ngữ
   description: LocalizedString; // Mô tả nội dung manga theo nhiều ngôn ngữ
   isLocked: boolean; // Xác định xem manga có bị khóa chỉnh sửa hay không
   links: LocalizedString; // Liên kết đến các trang bên ngoài (Amazon, MyAnimeList, AniList, v.v.)
@@ -133,4 +360,160 @@ export type MangaDexRelationship = {
     | "colored"
     | "serialization";
   attributes: any | null;
+};
+
+export type Cover = {
+  /** UUID formatted string */
+  id: string;
+  type: "cover_art";
+  attributes: CoverAttributes;
+  relationships: MangaDexRelationship[];
+};
+
+export type Author = {
+  /** UUID formatted string */
+  id: string;
+  type: "author";
+  attributes: AuthorAttributes;
+  relationships: MangaDexRelationship[];
+};
+
+export type AuthorAttributes = {
+  name: string;
+  imageUrl: string;
+  biography: LocalizedString;
+  /** Pattern: ^https?:\/\/twitter\.com(\/|$) */
+  twitter: string | null;
+  /** Pattern: ^https?:\/\/([\w-]+\.)?pixiv\.net(\/|$) */
+  pixiv: string | null;
+  /** Pattern: ^https?:\/\/([\w-]+\.)?melonbooks\.co\.jp(\/|$) */
+  melonBook: string | null;
+  /** Pattern: ^https?:\/\/([\w-]+\.)?fanbox\.cc(\/|$) */
+  fanBox: string | null;
+  /** Pattern: ^https?:\/\/([\w-]+\.)?booth\.pm(\/|$) */
+  booth: string | null;
+  /** Pattern: ^https?:\/\/([\w-]+\.)?nicovideo\.jp(\/|$) */
+  nicoVideo: string | null;
+  /** Pattern: ^https?:\/\/([\w-]+\.)?skeb\.jp(\/|$) */
+  skeb: string | null;
+  /** Pattern: ^https?:\/\/([\w-]+\.)?fantia\.jp(\/|$) */
+  fantia: string | null;
+  /** Pattern: ^https?:\/\/([\w-]+\.)?tumblr\.com(\/|$) */
+  tumblr: string | null;
+  /** Pattern: ^https?:\/\/www\.youtube\.com(\/|$) */
+  youtube: string | null;
+  /** Pattern: ^https?:\/\/([\w-]+\.)?weibo\.(cn|com)(\/|$) */
+  weibo: string | null;
+  /** Pattern: ^https?:\/\/([\w-]+\.)?naver\.com(\/|$) */
+  naver: string | null;
+  /** Pattern: ^https?:\/\/ */
+  website: string | null;
+  /** ```console
+   * Minimum: 1
+   * ``` */
+  version: number;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type CoverAttributes = {
+  volume: string | null;
+  fileName: string;
+  description: string | null;
+  locale: string | null;
+  /** ```console
+   * Minimum: 1
+   * ``` */
+  version: number;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type ExtendManga = Manga & {
+  cover_art?: Partial<Cover> & Pick<Cover, "id" | "type">;
+  author?: Partial<Author> & Pick<Author, "id" | "type">;
+  artist?: Partial<Author> & Pick<Author, "id" | "type">;
+};
+
+export type ScanlationGroup = {
+  /** UUID formatted string */
+  id: string;
+  type: "scanlation_group";
+  attributes: ScanlationGroupAttributes;
+  relationships: Relationship[];
+};
+
+export type ScanlationGroupAttributes = {
+  /** Tên nhóm dịch */
+  name: string;
+  /** Danh sách tên thay thế theo từng ngôn ngữ */
+  altNames: LocalizedString[];
+  /** Trang web chính thức của nhóm */
+  website: string | null;
+  /** Máy chủ IRC của nhóm (nếu có) */
+  ircServer: string | null;
+  /** Kênh IRC của nhóm (nếu có) */
+  ircChannel: string | null;
+  /** Đường dẫn Discord của nhóm (nếu có) */
+  discord: string | null;
+  /** Email liên hệ của nhóm */
+  contactEmail: string | null;
+  /** Mô tả về nhóm dịch */
+  description: string | null;
+  /** Đường dẫn Twitter của nhóm */
+  twitter: string | null;
+  /**
+   * Đường dẫn MangaUpdates của nhóm
+   * Mẫu hợp lệ: https://www.mangaupdates.com/group hoặc publisher
+   */
+  mangaUpdates: string | null;
+  /** Danh sách ngôn ngữ nhóm dịch tập trung vào */
+  focusedLanguages: string[] | null;
+  /** Trạng thái khóa của nhóm (true nếu bị khóa) */
+  locked: boolean;
+  /** Nhóm dịch có phải là nhóm chính thức không */
+  official: boolean;
+  /** Nhóm dịch có còn hoạt động không */
+  inactive: boolean;
+  /**
+   * Thời gian trễ khi xuất bản
+   * Tuân theo chuẩn ISO 8601: https://en.wikipedia.org/wiki/ISO_8601#Durations
+   */
+  publishDelay: string;
+  /** Phiên bản dữ liệu (giá trị tối thiểu là 1) */
+  version: number;
+  /** Ngày tạo nhóm */
+  createdAt: string;
+  /** Ngày cập nhật nhóm */
+  updatedAt: string;
+};
+
+export type StatisticsDetailsComments = {
+  threadId: number;
+  repliesCount: number;
+};
+
+export type Statistics = {
+  comments: StatisticsDetailsComments;
+  rating: {
+    average: number;
+    bayesian: number;
+  };
+  follows: number;
+};
+
+export type User = {
+  /** Chuỗi định dạng UUID */
+  id: string;
+  type: "user";
+  attributes: UserAttributes;
+  relationships: Relationship[];
+};
+export type UserAttributes = {
+  username: string;
+  roles: string[];
+  /** ```console
+   * Tối thiểu: 1
+   * ``` */
+  version: number;
 };

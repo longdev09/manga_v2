@@ -25,20 +25,6 @@ class InstanceApi {
       throw error;
     }
   }
-
-  // public async requestApiMangaDex<T>(
-  //   endpoint: string, // path
-  //   options: AxiosRequestConfig = {} // params
-  // ): Promise<AxiosResponse<T>> {
-  //   // 🔥 Trả về toàn bộ response
-  //   try {
-  //     const response = await this.client.get<T>(endpoint, options);
-  //     return response; // ✅ Trả về toàn bộ response thay vì chỉ response.data
-  //   } catch (error) {
-  //     console.error(`Lỗi API (${endpoint}):`, error);
-  //     throw error;
-  //   }
-  // }
 }
 
 export const Instance = new InstanceApi("http://localhost:3004/api/v1");
