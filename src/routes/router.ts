@@ -5,7 +5,7 @@ import Read from "../page/Read";
 interface RouteConfig {
   path: string;
   component: React.FC;
-  layout?: React.FC;
+  layout?: React.FC | null;
 }
 
 const router: RouteConfig[] = [
@@ -14,7 +14,7 @@ const router: RouteConfig[] = [
     path: "/manga/:id",
     component: Detail,
   },
-  { path: "/read/:id", component: Read },
+  { path: "/read/:id", component: Read, layout: null },
 ];
 
 export default router;

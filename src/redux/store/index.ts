@@ -1,11 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
+import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
+import control from "../slice/controlSlice";
 import mangaSlice from "../slice/mangaSlice";
-import { TypedUseSelectorHook, useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
 // nhận vào các reducer
 export const store = configureStore({
   reducer: {
     mangaSlice: mangaSlice,
+    control: control,
   },
 });
 

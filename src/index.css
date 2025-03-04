@@ -18,7 +18,7 @@ body{
 
 
 :root {
-
+  
   --bg-item: #1c1c1c;  /* màu dành cho các item */
   --border-item: #2b2929;
   --bg-item-hover: #242424; /* màu dành cho các item khi hover */
@@ -27,8 +27,10 @@ body{
   
   --color-text-main: #8c5ece;  /* màu dành cho text dành cho cả hover, cac text chinh */
   --color-text-title: #ddd; /*màu dành cho title */
-  --color-text-item: #747c88;  /*màu dành cho các text item */
+  --color-text-item: #FFFFFF99;  /*màu dành cho các text item */
   --color-text-sub: #a885da; /* màu dành cho sub text */
+  --width-siderbar: 18rem;
+
 }
 
 

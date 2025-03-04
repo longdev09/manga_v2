@@ -11,3 +11,13 @@ export const getChapterList = (
     params: query,
   });
 };
+
+export const getChapterId = (
+  query: MangadexTypes.GetChapterIdRequestOption,
+  chapterId: string
+): Promise<MangadexTypes.GetChapterIdResponse> => {
+  const path = `chapter/${chapterId}`;
+  return Instance.requestApiMangaDex(path, {
+    params: query,
+  });
+};

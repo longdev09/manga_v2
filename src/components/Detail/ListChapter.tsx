@@ -8,7 +8,6 @@ import { ItemChapter, ItemChapterGroup } from "./ItemChapter";
 import Pagination from "../../components/common/Paginate";
 import DataLoading from "../common/DataLoading";
 import { MangadexApi } from "../../api";
-import { TitleContent } from "../common/Title";
 
 const toggleOrder = {
   [MangadexApi.Static.Order.DESC]: MangadexApi.Static.Order.ASC,
@@ -42,10 +41,8 @@ const ListChapter = ({ mangId }: { mangId: string }) => {
       setChapterFormat(MangadexUtils.getFormatChapterList(chapterList));
   }, [chapterList]);
 
-  console.log(chapterFormat);
-
   return (
-    <div className="overflow-hidden  flex flex-col bg-[#1c1c1c] rounded-xl border border-[#2e2c2c]">
+    <div className="overflow-hidden flex flex-col bg-[#1c1c1c] rounded-xl border border-[#2e2c2c]">
       <div className="bg-[#2b2929] p-5">
         <Button
           onClick={handleSort}

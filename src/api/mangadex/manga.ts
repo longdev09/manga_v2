@@ -29,3 +29,11 @@ export const getMangaFeed = (
   const path = `manga/${mangaId}/feed`;
   return Instance.requestApiMangaDex(path, { params: query });
 };
+
+export const getMangaAggregate = (
+  query: MangadexTypes.GetMangaAggregateRequestOptions,
+  mangaId: string
+): Promise<MangadexTypes.GetMangaAggregateResponse> => {
+  const path = `manga/${mangaId}/aggregate`;
+  return Instance.requestApiMangaDex(path, { params: query });
+};

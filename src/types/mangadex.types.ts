@@ -102,6 +102,10 @@ export type GetChapterRequestOptions = {
   includes?: ReferenceExpansionChapter;
 };
 
+export type GetChapterIdRequestOption = {
+  includes?: ReferenceExpansionChapter;
+};
+
 export type ReferenceExpansionChapter = (
   | "manga"
   | "scanlation_group"
@@ -153,9 +157,20 @@ export type GetMangaIdRequestOptions = {
   includes?: MangadexApi.Static.Includes[];
 };
 
+export type GetMangaAggregateRequestOptions = {
+  translatedLanguage?: string[];
+  groups?: string[];
+};
+
 /***********************
  * TYPE CHAPTER
  ***********************/
+
+export type GetChapterIdResponse = {
+  result: string;
+  response: string;
+  data: Chapter;
+};
 
 export type GetChapterOrder = {
   createdAt?: MangadexApi.Static.Order;
@@ -288,6 +303,37 @@ export type GetMangaIdFeedResponse = {
   limit: number;
   offset: number;
   total: number;
+};
+
+// at home
+export type GetAtHome = {
+  result: string;
+  baseUrl: string;
+  chapter: ChapterAtHome;
+};
+
+export type ChapterAtHome = {
+  hash: string;
+  data: string[];
+  dataSaver: string[];
+};
+
+export type GetMangaAggregateResponse = {
+  result: "ok";
+  volumes: Record<string, AggregateVolume>;
+};
+
+export type AggregateVolume = {
+  volume: string;
+  count: number;
+  chapters: Record<string, AggregateChapter>;
+};
+
+export type AggregateChapter = {
+  chapter: string;
+  id: string;
+  others: string[];
+  count: number;
 };
 
 /***********************

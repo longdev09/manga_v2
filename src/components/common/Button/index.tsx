@@ -11,9 +11,11 @@ interface BtnProps {
 }
 const Button = ({ icon, name, variant, onClick, to, className }: BtnProps) => {
   const variantStyles = {
-    primary: "bg-[var(--bg-btn)] hover:bg-[var(--bg-btn-hover)]",
-    secondary: "bg-[#3a2458] hover:bg-[#5b388b]",
-    danger: "bg-red-500 hover:bg-red-600",
+    primary:
+      "bg-[var(--bg-btn)] hover:bg-[var(--bg-btn-hover)] justify-center px-7 ",
+    secondary: "bg-[#65439b78] hover:bg-[#5b388b]",
+    danger:
+      "bg-[#65439b78] hover:bg-[#5b388b] !text-[14px] justify-between px-3 py-[11px]",
   };
 
   let Comp: React.ElementType = "button"; // ✅ Mặc định là button
@@ -27,11 +29,11 @@ const Button = ({ icon, name, variant, onClick, to, className }: BtnProps) => {
   return (
     <Comp
       {...props}
-      className={` ${variantStyles[variant]} duration-300 cursor-pointer flex flex-row gap-2 items-center px-7 py-2.5 justify-center
-     rounded-sm  text-white font-bold text-[16px] ${className}`}
+      className={` ${variantStyles[variant]} text-white duration-300  cursor-pointer flex flex-row gap-2 items-center py-2.5 
+     rounded-sm font-bold  ${className}`}
     >
-      <span>{name}</span>
-      {icon ? <span>{icon}</span> : ""}
+      {name ? <span>{name}</span> : ""}
+      {icon && <span>{icon}</span>}
     </Comp>
   );
 };
